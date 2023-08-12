@@ -18,6 +18,14 @@ Welcome to the E-Commerce Back End project! In this project, you'll build the ba
 
 ## Walkthrough
 
+[Ecomm Aug 12, 2023 3_33 PM.webm](https://github.com/jlmartin82/E-commerce/assets/129562637/479db70f-9800-41d0-996d-8c98627ec371)
+
+
+
+
+[Ecommerc.webm](https://github.com/jlmartin82/E-commerce/assets/129562637/c8c2bee2-4425-44ba-bb11-f9a6e4464991)
+
+
 
 
 ## Getting Started
