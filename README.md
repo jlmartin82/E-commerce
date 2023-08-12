@@ -5,6 +5,7 @@ Welcome to the E-Commerce Back End project! In this project, you'll build the ba
 ## Table of Contents
 
 - [Introduction](#e-commerce-back-end-with-object-relational-mapping-orm)
+- [Walkthrough](#walkthrough)
 - [Getting Started](#getting-started)
 - [Database Models](#database-models)
 - [Associations](#associations)
@@ -14,6 +15,10 @@ Welcome to the E-Commerce Back End project! In this project, you'll build the ba
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Walkthrough
+
+
 
 ## Getting Started
 
