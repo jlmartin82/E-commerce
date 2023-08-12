@@ -1,280 +1,88 @@
-our Task
-Internet retail, also known as e-commerce, is the largest sector of the electronics industry, generating an estimated $29 trillion in 2019. E-commerce platforms like Shopify and WooCommerce provide a suite of services to businesses of all sizes. Due to their prevalence, understanding the fundamental architecture of these platforms will benefit you as a full-stack web developer.
-Your task is to build the back end for an e-commerce site by modifying starter code. You’ll configure a working Express.js API to use Sequelize to interact with a MySQL database.
-Because this application won’t be deployed, you’ll also need to provide a link to a walkthrough video that demonstrates its functionality and all of the acceptance criteria being met. You’ll need to submit a link to the video and add it to the readme of your project.
+# E-Commerce Back End with Object-Relational Mapping (ORM)
 
-User Story
+Welcome to the E-Commerce Back End project! In this project, you'll build the backend for an e-commerce site using Express.js and Sequelize to interact with a MySQL database. The goal is to create a robust and functional API that handles various CRUD (Create, Read, Update, Delete) operations for categories, products, and tags.
 
-AS A manager at an internet retail company
-I WANT a back end for my e-commerce website that uses the latest technologies
-SO THAT my company can compete with other e-commerce companies
+## Table of Contents
 
+- [Introduction](#e-commerce-back-end-with-object-relational-mapping-orm)
+- [Getting Started](#getting-started)
+- [Database Models](#database-models)
+- [Associations](#associations)
+- [API Routes](#api-routes)
+- [Seeding the Database](#seeding-the-database)
+- [Syncing Sequelize to Database](#syncing-sequelize-to-database)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
+## Getting Started
 
-Acceptance Criteria
+To get started with this project, follow these steps:
 
-GIVEN a functional Express.js API
-WHEN I add my database name, MySQL username, and MySQL password to an environment variable file
-THEN I am able to connect to a database using Sequelize
-WHEN I enter schema and seed commands
-THEN a development database is created and is seeded with test data
-WHEN I enter the command to invoke the application
-THEN my server is started and the Sequelize models are synced to the MySQL database
-WHEN I open API GET routes in Insomnia for categories, products, or tags
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia
-THEN I am able to successfully create, update, and delete data in my database
+1. Clone this repository to your local machine.
+2. Install the required dependencies using `npm install`.
+3. Create a `.env` file in the project root directory and add your MySQL username, password, and database name as environment variables:
+4. Create your database using the provided `schema.sql` file.
 
+## Database Models
 
+This project requires the following database models with specific attributes:
 
-Mock-Up
-The following animation shows the application's GET routes to return all categories, all products, and all tags being tested in Insomnia:
+- **Category**
+  - id (Integer, Primary Key)
+  - category_name (String, Not Null)
 
-The following animation shows the application's GET routes to return a single category, a single product, and a single tag being tested in Insomnia:
+- **Product**
+  - id (Integer, Primary Key)
+  - product_name (String, Not Null)
+  - price (Decimal, Not Null)
+  - stock (Integer, Not Null, Default: 10)
+  - category_id (Integer, Foreign Key referencing Category)
 
-The following animation shows the application's POST, PUT, and DELETE routes for categories being tested in Insomnia:
+- **Tag**
+  - id (Integer, Primary Key)
+  - tag_name (String)
 
-Your walkthrough video should also show the POST, PUT, and DELETE routes for products and tags being tested in Insomnia.
+- **ProductTag**
+  - id (Integer, Primary Key)
+  - product_id (Integer, Foreign Key referencing Product)
+  - tag_id (Integer, Foreign Key referencing Tag)
 
-Getting Started
-This Challenge will require a video submission. Refer to the Fullstack Blog Video Submission Guide for additional guidance on creating a video.
-You’ll need to use the MySQL2 and Sequelize packages to connect your Express.js API to a MySQL database and the dotenv package to use environment variables to store sensitive data.
-Use the schema.sql file in the db folder to create your database with MySQL shell commands. Use environment variables to store sensitive data like your MySQL username, password, and database name.
+## Associations
 
-Database Models
-Your database should contain the following four models, including the requirements listed for each model:
+This project requires the following associations between the models:
 
+- A product belongs to a category, and a category can have many products.
+- A product belongs to many tags, and a tag belongs to many products.
 
-Category
+## API Routes
 
+Complete the API routes in `product-routes.js`, `tag-routes.js`, and `category-routes.js` to perform CRUD operations using Sequelize models.
 
-id
+## Seeding the Database
 
+After creating the models and routes, use the command `npm run seed` to seed the database with initial data.
 
-Integer.
+## Syncing Sequelize to Database
 
+The Sequelize models should be synced with the MySQL database on server start. Ensure that your `server.js` file includes the necessary code to achieve this.
 
-Doesn't allow null values.
+## Usage
 
+1. Install the dependencies: `npm install`
+2. Create the `.env` file and set your database credentials.
+3. Create the database using `schema.sql`.
+4. Seed the database using `npm run seed`.
+5. Start the server: `npm start`
+6. Use a tool like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/) to test the API endpoints.
 
-Set as primary key.
+## Contributing
 
+Contributions are welcome! If you find any issues or have improvements to suggest, feel free to create a pull request.
 
-Uses auto increment.
+## License
 
-
-
-
-category_name
-
-
-String.
-
-
-Doesn't allow null values.
-
-
-
-
-
-
-Product
-
-
-id
-
-
-Integer.
-
-
-Doesn't allow null values.
-
-
-Set as primary key.
-
-
-Uses auto increment.
-
-
-
-
-product_name
-
-
-String.
-
-
-Doesn't allow null values.
-
-
-
-
-price
-
-
-Decimal.
-
-
-Doesn't allow null values.
-
-
-Validates that the value is a decimal.
-
-
-
-
-stock
-
-
-Integer.
-
-
-Doesn't allow null values.
-
-
-Set a default value of 10.
-
-
-Validates that the value is numeric.
-
-
-
-
-category_id
-
-
-Integer.
-
-
-References the Category model's id.
-
-
-
-
-
-
-Tag
-
-
-id
-
-
-Integer.
-
-
-Doesn't allow null values.
-
-
-Set as primary key.
-
-
-Uses auto increment.
-
-
-
-
-tag_name
-
-String.
-
-
-
-
-
-ProductTag
-
-
-id
-
-
-Integer.
-
-
-Doesn't allow null values.
-
-
-Set as primary key.
-
-
-Uses auto increment.
-
-
-
-
-product_id
-
-
-Integer.
-
-
-References the Product model's id.
-
-
-
-
-tag_id
-
-
-Integer.
-
-
-References the Tag model's id.
-
-
-
-
-
-
-
-Associations
-You'll need to execute association methods on your Sequelize models to create the following relationships between them:
-
-
-Product belongs to Category, and Category has many Product models, as a category can have multiple products but a product can only belong to one category.
-
-
-Product belongs to many Tag models, and Tag belongs to many Product models. Allow products to have multiple tags and tags to have many products by using the ProductTag through model.
-
-
-
-Hint: Make sure you set up foreign key relationships that match the column we created in the respective models.
-
-
-Fill Out the API Routes to Perform RESTful CRUD Operations
-Fill out the unfinished routes in product-routes.js, tag-routes.js, and category-routes.js to perform create, read, update, and delete operations using your Sequelize models.
-Note that the functionality for creating the many-to-many relationship for products has already been completed for you.
-
-Hint: Be sure to look at the mini-project code for syntax help and use your model's column definitions to figure out what req.body will be for POST and PUT routes!
-
-
-Seed the Database
-After creating the models and routes, run npm run seed to seed data to your database so that you can test your routes.
-
-Sync Sequelize to the Database on Server Start
-Create the code needed in server.js to sync the Sequelize models to the MySQL database on server start.
-
-Grading Requirements
-
-Note: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
-
-
-A repository that has no code
-
-
-A repository that includes a unique name but nothing else
-
-
-A repository that includes only a README file but nothing else
-
-
-A repository that only includes starter code
-
-
-
-This Challenge is graded based on the following criteria:
-
-
-
+This project is licensed under the [MIT License](LICENSE).
 
 
 
